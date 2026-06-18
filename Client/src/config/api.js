@@ -1,5 +1,5 @@
-// Production API URL - update this after deploying backend to Render
-const PRODUCTION_API_URL = 'https://kds-api.onrender.com';
+// Production API URL - same origin since backend serves frontend
+const PRODUCTION_API_URL = '';
 
 // Use production URL in production, otherwise localhost or env var
 const rawApiBaseUrl = process.env.REACT_APP_API_URL || 

@@ -1,0 +1,293 @@
+/* ── Image Carousel ───────────────── */
+.img-slider-wrapper {
+    position: relative;
+    max-width: 1100px;
+    margin: 36px auto 0;
+}
+
+.img-slider-carousel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 10px 0 20px;
+}
+
+.img-slider-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.img-slider-card-button {
+    border: 0;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+    appearance: none;
+}
+
+.img-slider-card-button:focus-visible {
+    outline: 3px solid rgba(255, 145, 0, 0.75);
+    outline-offset: 4px;
+}
+
+.img-slider-card-button--1,
+.img-slider-card-button--2,
+.img-slider-card-button--3 { transform: none; }
+
+.img-slider-card-button:hover {
+    transform: translateY(-4px);
+}
+
+.img-slider-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+
+.img-slider-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+/* Arrows — hidden (all 4 visible at once) */
+.img-slider-arrow {
+    display: none;
+}
+
+.img-slider-arrow-hidden {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--page-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.img-slider-arrow:hover {
+    background: #f0f0f0;
+}
+
+.img-slider-prev {
+    left: -20px;
+}
+
+.img-slider-next {
+    right: -20px;
+}
+
+/* ── Auto-ticker (second strip) ───── */
+.img-ticker-section {
+    margin-top: 32px;
+}
+
+.img-ticker-viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0 16px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.img-ticker-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    will-change: transform;
+}
+
+.img-ticker-card {
+    flex: 0 0 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.img-ticker-card {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    appearance: none;
+}
+
+.img-ticker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+}
+
+.img-ticker-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.img-ticker-controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.img-ticker-controls .img-slider-arrow-hidden {
+    position: static;
+    transform: none;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+}
+
+.img-ticker-controls .img-slider-arrow-hidden:hover {
+    transform: translateY(-1px);
+}
+
+.img-slider-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: radial-gradient(circle at top, rgba(0,139,139,0.18) 0%, rgba(7,20,20,0.94) 45%, rgba(3,10,10,0.98) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.img-slider-lightbox-content {
+    position: relative;
+    width: min(1100px, 100%);
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 22px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.img-slider-lightbox-content img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.45);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.img-slider-lightbox-nav,
+.img-slider-lightbox-close {
+    position: absolute;
+    border: 0;
+    background: rgba(255, 255, 255, 0.92);
+    color: #123;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.img-slider-lightbox-nav:hover,
+.img-slider-lightbox-close:hover {
+    transform: scale(1.04);
+    background: white;
+}
+
+.img-slider-lightbox-nav {
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    font-size: 34px;
+    transform: translateY(-50%);
+}
+
+.img-slider-lightbox-nav-prev {
+    left: -10px;
+}
+
+.img-slider-lightbox-nav-next {
+    right: -10px;
+}
+
+.img-slider-lightbox-close {
+    top: -12px;
+    right: -12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    font-size: 30px;
+    line-height: 1;
+}
+
+@media (max-width: 800px) {
+    .img-ticker-card { flex: 0 0 220px; }
+
+    .img-slider-card-button--2 {
+        transform: translateY(4px) rotate(1deg);
+    }
+
+    .img-slider-lightbox-content {
+        padding: 14px;
+        border-radius: 22px;
+    }
+
+    .img-slider-lightbox {
+        padding: 14px;
+    }
+
+    .img-slider-lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 30px;
+    }
+
+    .img-slider-lightbox-nav-prev {
+        left: 0;
+    }
+
+    .img-slider-lightbox-nav-next {
+        right: 0;
+    }
+
+    .img-slider-lightbox-close {
+        top: -8px;
+        right: -4px;
+        width: 38px;
+        height: 38px;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 800px) {
+    .img-slider-carousel { grid-template-columns: repeat(2, 1fr); }
+    .img-slider-arrow {
+        display: flex;
+        width: 36px;
+        height: 36px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .img-slider-prev { left: 4px; }
+    .img-slider-next { right: 4px; }
+}

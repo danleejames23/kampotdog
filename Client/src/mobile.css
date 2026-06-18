@@ -1,0 +1,907 @@
+/* ══════════════════════════════════════════════════════════════
+   KDS MOBILE COMPREHENSIVE FIXES
+   Fixes all mobile layout issues across every page
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Global Mobile Hardening ────────────────────────────────── */
+html, body, #root {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ── HOME PAGE / HERO SECTION ───────────────────────────────── */
+@media (max-width: 768px) {
+    /* Hero container - stack vertically */
+    .home-container {
+        flex-direction: column !important;
+        padding: 16px !important;
+        gap: 24px !important;
+        min-height: auto !important;
+    }
+
+    .homeContainer-left,
+    .homeContainer-right {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Title row - stack on very small screens */
+    .home-titleRow {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .home-left-dog {
+        width: 60px !important;
+        margin-top: 0;
+    }
+
+    .home-title {
+        font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+        line-height: 1.1 !important;
+        text-align: center;
+    }
+
+    .home-second-para {
+        font-size: 1rem !important;
+        text-align: center;
+        margin: 16px 0 !important;
+    }
+
+    /* Hero artwork sizing */
+    .hero-artwork {
+        width: min(70vw, 280px) !important;
+        margin: 0 auto;
+    }
+
+    .hero-main-image {
+        width: min(70vw, 280px) !important;
+    }
+
+    /* Hero badges - smaller on mobile */
+    .hero-badge-gold {
+        width: 60px !important;
+        height: 60px !important;
+        top: 2% !important;
+        left: -5% !important;
+    }
+
+    .hero-badge-right {
+        width: 70px !important;
+        height: 70px !important;
+        top: 55% !important;
+        right: -5% !important;
+    }
+
+    .hero-badge-bottom-left {
+        width: 75px !important;
+        height: 75px !important;
+        bottom: 5% !important;
+        left: -10% !important;
+    }
+
+    .hero-paw {
+        width: 40px !important;
+    }
+
+    .hero-paw-mid-right {
+        width: 50px !important;
+    }
+
+    /* Counter banner (12 dogs on site section) */
+    .counter-banner {
+        flex-direction: column;
+        padding: 24px 16px !important;
+        margin: 20px 16px !important;
+        gap: 16px;
+        overflow: hidden !important;
+        height: auto !important;
+    }
+
+    .counter-dog {
+        display: none;
+    }
+
+    .counter-items {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 !important;
+    }
+
+    .counter-item {
+        padding: 12px 16px;
+        min-width: auto;
+        width: 100%;
+    }
+
+    .counter-value {
+        font-size: 1.8rem !important;
+    }
+
+    .counter-label {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* ── THE PACK PAGE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .pack-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .pack-hero h1 {
+        font-size: 2rem !important;
+    }
+
+    .pack-hero-content p {
+        font-size: 1rem !important;
+    }
+
+    /* Filter bar - scrollable on mobile */
+    .pack-filter-bar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .pack-filter-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    /* Grid - 1 column on mobile, 2 on tablet */
+    .pack-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        padding: 0 16px;
+    }
+
+    @media (min-width: 480px) {
+        .pack-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+    /* Card adjustments */
+    .pack-card {
+        max-width: 100%;
+    }
+
+    .pack-card-name {
+        font-size: 1.1rem;
+    }
+
+    /* Modal sizing */
+    .pack-modal {
+        width: calc(100% - 32px);
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+    }
+
+    .pack-modal-img {
+        height: 200px;
+    }
+
+    .pack-modal-body {
+        padding: 20px;
+    }
+
+    .pack-modal-name {
+        font-size: 1.5rem;
+    }
+
+    /* Sponsor modal */
+    .pack-sponsor-modal {
+        width: calc(100% - 32px);
+        padding: 24px;
+    }
+
+    .pack-sponsor-modal-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pack-sponsor-modal-avatar {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+    }
+
+    .pack-sponsor-breakdown-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .pack-sform-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pack-sponsor-breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── TEAM SECTION ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .team-section {
+        padding: 60px 16px 70px !important;
+    }
+
+    .team-inner {
+        padding: 24px 16px 28px !important;
+    }
+
+    .team-title {
+        font-size: 2rem !important;
+    }
+
+    .team-sub {
+        font-size: 0.95rem !important;
+    }
+
+    /* Owner card */
+    .team-card--owner .team-card-img-wrap {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    /* Grid already uses flexbox - adjust gaps */
+    .team-grid {
+        gap: 20px;
+    }
+
+    .team-card {
+        width: 160px;
+        padding: 12px 8px 10px;
+    }
+
+    .team-card-img-wrap {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .team-card-name {
+        font-size: 1rem !important;
+    }
+
+    /* Modal adjustments */
+    .team-modal {
+        grid-template-columns: 1fr;
+        width: calc(100% - 32px);
+        padding: 24px;
+    }
+
+    .team-modal-image-wrap {
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .team-modal-copy h3 {
+        font-size: 1.5rem;
+    }
+
+    .team-modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .team-modal-nav-prev {
+        left: -10px;
+    }
+
+    .team-modal-nav-next {
+        right: -10px;
+    }
+}
+
+/* ── LEARN MORE SECTION ─────────────────────────────────────── */
+@media (max-width: 768px) {
+    .learn-more-section {
+        padding: 50px 16px !important;
+    }
+
+    .learn-more-title {
+        font-size: 1.8rem !important;
+    }
+
+    .learn-more-content {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .learn-more-video-wrapper {
+        width: 100%;
+    }
+
+    .learn-more-video-wrapper iframe {
+        height: 200px;
+    }
+
+    .learn-more-about {
+        padding: 0;
+    }
+
+    .learn-more-about p {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* ── OUR DREAM SECTION ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .our-dream-section {
+        padding: 50px 16px !important;
+    }
+
+    .our-dream-title {
+        font-size: 1.8rem !important;
+    }
+
+    .our-dream-inner {
+        padding: 28px 20px;
+    }
+
+    .our-dream-gallery-wrap {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .our-dream-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .our-dream-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .our-dream-gallery-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── PLANNING TO ADOPT SECTION ────────────────────────────────── */
+@media (max-width: 768px) {
+    .planning-container {
+        flex-direction: column;
+        padding: 20px 16px !important;
+        margin: 16px !important;
+        transform: none !important;
+        gap: 16px;
+    }
+
+    /* Card slider fixes */
+    .boxes-carousel {
+        width: 100%;
+        overflow: hidden !important;
+    }
+
+    .boxes-viewport {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+    }
+
+    .boxes-container {
+        display: flex !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        margin: 0 0 16px !important;
+        transform: translateX(calc(-1 * var(--cards-offset, 0%))) !important;
+        transition: transform 0.3s ease;
+    }
+
+    .card-slide {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .card-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+        overflow: hidden !important;
+    }
+
+    .card-container-content {
+        width: calc(100% - 20px) !important;
+        margin: 10px auto !important;
+        padding: 24px 20px !important;
+        min-height: auto !important;
+        box-sizing: border-box;
+    }
+
+    .card-container h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.35 !important;
+        padding: 0 0 14px 0 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+    }
+
+    .card-container p {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        word-wrap: break-word;
+    }
+
+    .boxes-dots {
+        margin-top: 16px;
+        gap: 12px;
+    }
+
+    .boxes-dot {
+        width: 14px;
+        height: 14px;
+    }
+
+    .left-pic {
+        display: none;
+    }
+
+    .right-para {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ── YOUTUBE SECTION ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .yt-section {
+        padding: 50px 16px !important;
+    }
+
+    .yt-section-title {
+        font-size: 1.8rem !important;
+    }
+
+    .yt-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .yt-card iframe {
+        height: 200px;
+    }
+}
+
+/* ── CONTACT PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .contact-hero-title {
+        font-size: 2rem !important;
+    }
+
+    .contact-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .contact-card {
+        padding: 24px 20px;
+    }
+
+    .contact-form-wrap {
+        margin: 0 16px;
+        padding: 28px 24px;
+    }
+
+    .contact-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* ── BLOGS PAGE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .blogs-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .blogs-hero-title {
+        font-size: 2rem !important;
+    }
+
+    .blogs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 16px;
+    }
+
+    .blog-card {
+        max-width: 100%;
+    }
+
+    .featured-blog-card {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-blog-image {
+        height: 200px;
+    }
+
+    .blog-article {
+        padding: 0 16px;
+    }
+
+    .blog-article-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ── DONATE PAGE ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .donate-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .donate-hero h1 {
+        font-size: 2rem !important;
+    }
+
+    .don-methods {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 16px;
+    }
+
+    .don-method-card {
+        padding: 24px 20px;
+    }
+
+    .don-form-section {
+        margin: 0 16px;
+        padding: 28px 24px;
+    }
+}
+
+/* ── VET DEBT PAGE ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .vd-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .vd-gfm-section {
+        margin: 0 16px;
+    }
+
+    .vd-gfm-header {
+        padding: 24px 20px;
+    }
+
+    .vd-clinic-list {
+        padding: 0 16px;
+    }
+
+    .vd-clinic-card {
+        padding: 24px 20px;
+    }
+
+    .vd-stats-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* ── ADOPT/SPONSOR PAGE ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .as-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .as-split {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 16px;
+    }
+
+    .as-panel {
+        transform: none !important;
+    }
+
+    .as-panel-banner {
+        height: 120px;
+    }
+
+    .as-panel-body {
+        padding: 24px 20px;
+    }
+
+    .as-panel-title {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ── DONATIONS PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .don-hero {
+        padding: 60px 16px 40px !important;
+    }
+
+    .pay-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 16px;
+    }
+
+    .pay-grid-v2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .pay-card,
+    .pay-card-v2 {
+        max-width: 100%;
+    }
+
+    .pay-card-v2 {
+        padding: 20px;
+    }
+}
+
+/* ── DOG DETAIL PAGE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .dog-detail-page {
+        padding: 20px 16px;
+    }
+
+    .back-to-pack {
+        margin-bottom: 20px;
+    }
+
+    .dog-detail-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .dog-detail-image {
+        max-width: 100%;
+    }
+
+    .dog-detail-name {
+        font-size: 1.8rem !important;
+    }
+
+    .dog-detail-tags {
+        flex-wrap: wrap;
+    }
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .footer-desktop {
+        display: none;
+    }
+
+    .footer-mobile {
+        display: block;
+        padding: 32px 16px;
+    }
+
+    .footer-mobile-brand {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .footer-mobile-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .footer-mobile-links a {
+        display: block;
+        padding: 12px;
+        background: rgba(255,255,255,0.5);
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--sb-ink);
+        font-family: 'Oxygen', sans-serif;
+        font-size: 0.9rem;
+    }
+
+    .footer-mobile-social {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .footer-mobile-bottom {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #666;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-mobile-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── NAVBAR MOBILE MENU ───────────────────────────────────────── */
+@media (max-width: 900px) {
+    .navbar-container {
+        width: 100% !important;
+        min-width: 100% !important;
+        padding: 12px 16px !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        position: relative !important;
+    }
+
+    .navbar-left {
+        order: 0;
+        flex: 0 0 auto;
+        margin-right: auto !important;
+    }
+
+    .navbar-center {
+        display: none !important;
+    }
+
+    .navbar-right {
+        order: 1;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 8px;
+        margin-left: auto !important;
+        flex: 0 0 auto;
+        position: absolute !important;
+        right: 16px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+    }
+
+    .navbar-logo {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: 0 !important;
+    }
+
+    .Navbar-button {
+        min-width: auto !important;
+        padding: 10px 18px !important;
+        font-size: 14px !important;
+        height: 40px !important;
+    }
+
+    .navbar-mobile-toggle {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .brand-mark,
+    .logo-container>p {
+        font-size: 20px !important;
+    }
+}
+
+/* ── IMAGE SLIDER / CAROUSEL ──────────────────────────────────── */
+@media (max-width: 768px) {
+    .img-slider-wrapper {
+        margin: 20px 16px 0;
+    }
+
+    .img-slider-carousel {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .img-slider-card img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .img-slider-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 24px;
+    }
+
+    .img-slider-prev { left: 2px; }
+    .img-slider-next { right: 2px; }
+
+    .img-ticker-card {
+        flex: 0 0 180px;
+    }
+
+    .img-ticker-card img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .img-slider-lightbox-content {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .img-slider-lightbox-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+    }
+
+    .img-slider-lightbox-close {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .img-slider-carousel {
+        grid-template-columns: 1fr;
+    }
+
+    .img-ticker-card {
+        flex: 0 0 160px;
+    }
+}
+
+/* ── SCROLL TO TOP BUTTON ─────────────────────────────────────── */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+/* ── GENERAL UTILITIES ────────────────────────────────────────── */
+@media (max-width: 768px) {
+    /* Reduce animation intensity on mobile */
+    .sb-paw {
+        display: none;
+    }
+
+    /* Smaller section padding */
+    section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* Touch-friendly button sizing */
+    button, .kds-cta, .pack-sponsor-btn, .Home-button {
+        min-height: 44px;
+    }
+}

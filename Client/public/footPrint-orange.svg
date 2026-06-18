@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Paw print">
+  <g fill="#ff9100">
+    <ellipse cx="15" cy="18" rx="7" ry="10" transform="rotate(-28 15 18)" />
+    <ellipse cx="28" cy="10" rx="7" ry="10" transform="rotate(-10 28 10)" />
+    <ellipse cx="42" cy="10" rx="7" ry="10" transform="rotate(10 42 10)" />
+    <ellipse cx="55" cy="18" rx="7" ry="10" transform="rotate(28 55 18)" />
+    <path d="M32 27c-11.5 0-21 8.7-21 19.3C11 55.7 20.5 61 32 61s21-5.3 21-14.7C53 35.7 43.5 27 32 27z" />
+  </g>
+</svg>

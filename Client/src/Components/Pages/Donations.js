@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Pages.css';
 import PageImageTicker from './PageImageTicker';
-import { apiUrl } from '../../config/api';
+import { counters } from '../../data/siteData';
 import qrCode from './qrcode.png';
 import wiseLogo from './wiselogo.webp';
 import abaLogo from './abalogo.jpeg';
@@ -94,26 +94,7 @@ const buildCategories = (dogsOnSiteValue) => [
 
 const Donations = () => {
     const [copied, setCopied] = useState('');
-    const [dogsOnSiteValue, setDogsOnSiteValue] = useState('72');
-
-    useEffect(() => {
-        const fetchCounters = async () => {
-            try {
-                const res = await fetch(apiUrl(`/counters?ts=${Date.now()}`), {
-                    cache: 'no-store',
-                });
-                const data = await res.json();
-                const dogsCounter = Array.isArray(data)
-                    ? data.find((counter) => counter.key === 'dogs_on_site')
-                    : null;
-                if (dogsCounter?.value) setDogsOnSiteValue(String(dogsCounter.value));
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchCounters();
-    }, []);
+    const dogsOnSiteValue = counters.find((counter) => counter.key === 'dogs_on_site')?.value || '85';
 
     const categories = buildCategories(dogsOnSiteValue);
 

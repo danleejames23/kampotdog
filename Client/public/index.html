@@ -15,13 +15,12 @@
     <meta property="og:title" content="Kampot Dog Sanctuary | Rescue, Care, Adoption & Sponsorship" />
     <meta property="og:description" content="Rescuing and caring for vulnerable dogs in Kampot, Cambodia. Support the sanctuary through adoption, sponsorship, and donations." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Kampot Dog Sanctuary | Rescue, Care, Adoption & Sponsorship" />
     <meta name="twitter:description" content="Support Kampot Dog Sanctuary and help rescued dogs with food, shelter, medical treatment, and long-term care." />
-    <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
-    <link rel="canonical" href="https://your-netlify-site.netlify.app/" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,7 +74,6 @@
         "@context": "https://schema.org",
         "@type": "AnimalShelter",
         "name": "Kampot Dog Sanctuary",
-        "url": "https://your-netlify-site.netlify.app/",
         "email": "kampotdogsanctuary@gmail.com",
         "address": {
           "@type": "PostalAddress",
@@ -92,6 +90,15 @@
   </head>
   <body class="hide-scrollbar">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <form name="contact" data-netlify="true" hidden>
+      <input name="name" /><input name="email" /><input name="subject" /><textarea name="message"></textarea>
+    </form>
+    <form name="sponsor-interest" data-netlify="true" hidden>
+      <input name="name" /><input name="email" /><input name="phone" /><input name="dog" /><textarea name="message"></textarea>
+    </form>
+    <form name="dog-return" data-netlify="true" hidden>
+      <input name="dogName" /><input name="adopterName" /><input name="email" /><input name="phone" /><input name="reason" /><textarea name="additionalInfo"></textarea>
+    </form>
     <div id="root"></div>
   </body>
 </html>

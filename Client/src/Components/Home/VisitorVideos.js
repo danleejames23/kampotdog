@@ -46,10 +46,11 @@ const VisitorVideos = ({
                     <div className="visitor-video-wrapper">
                         {activeVideoId ? (
                             <iframe
-                                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&controls=1`}
+                                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=0&playsinline=1&rel=0&modestbranding=1&controls=1`}
                                 title={video.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
+                                referrerPolicy="strict-origin-when-cross-origin"
                             ></iframe>
                         ) : (
                             <img
@@ -66,6 +67,9 @@ const VisitorVideos = ({
                         <h3>{video.title}</h3>
                         <p className="visitor-video-byline">By {video.byline}</p>
                         <p className="visitor-video-desc">{video.description}</p>
+                        <a className="learn-more-video-fallback" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">
+                            Watch on YouTube ↗
+                        </a>
                     </div>
                 </div>
             </div>

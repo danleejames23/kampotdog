@@ -14,7 +14,7 @@ const heroDescription = "Your donation can make a world of difference. Help us g
 const marqueeItems = [
   '🐾 woof woof',
   '✨ rescued with love',
-  '🐶 70+ dogs in the pack',
+  '🐶 85 dogs in the pack',
   '❤️ tails wag here',
   '🏝 kampot, cambodia',
   '🦴 every donation helps',

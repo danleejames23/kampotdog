@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { apiUrl, getImageUrl } from '../../config/api';
+import React, { useState } from 'react';
+import { getImageUrl } from '../../config/api';
+import { dogs } from '../../data/siteData';
+import { submitNetlifyForm } from '../../utils/netlifyForms';
 import './ThePack.css';
 import PawConfetti from '../Scrapbook/PawConfetti';
 
@@ -18,8 +20,6 @@ const popupOverlayStyle = {
 };
 
 const ThePack = () => {
-    const [dogs, setDogs] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all');
     const [selectedDog, setSelectedDog] = useState(null);
     const [sponsorDog, setSponsorDog] = useState(null);
@@ -33,18 +33,11 @@ const ThePack = () => {
         e.preventDefault();
         setSponsorSubmitting(true);
         try {
-            const res = await fetch(apiUrl('/contact/save'), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: sponsorForm.name,
-                    email: sponsorForm.email,
-                    subject: `Sponsor request for ${sponsorDog?.name}`,
-                    message: `Phone: ${sponsorForm.phone}\n\n${sponsorForm.message}`,
-                }),
+            await submitNetlifyForm('sponsor-interest', {
+                ...sponsorForm,
+                dog: sponsorDog?.name,
             });
-            if (res.ok) setSponsorStatus('success');
-            else setSponsorStatus('error');
+            setSponsorStatus('success');
         } catch {
             setSponsorStatus('error');
         } finally {
@@ -59,24 +52,9 @@ const ThePack = () => {
         setSponsorForm({ name: '', email: '', phone: '', message: '' });
     };
 
-    useEffect(() => {
-        const fetchDogs = async () => {
-            try {
-                const res = await fetch(apiUrl('/dogs'));
-                const data = await res.json();
-                setDogs(Array.isArray(data) ? data : []);
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDogs();
-    }, []);
-
     const filtered = dogs.filter((dog) => {
         const isSponsored = dog.sponsored === 1 || dog.sponsored === true;
-        if (filter === 'needs') return !isSponsored;
+        if (filter === 'needs') return !isSponsored && !dog.adopted;
         if (filter === 'sponsored') return isSponsored;
         return true;
     });
@@ -111,12 +89,7 @@ const ThePack = () => {
                 </div>
             </div>
 
-            {loading ? (
-                <div className="pack-loading">
-                    <div className="pack-spinner"></div>
-                    <p>Loading the pack...</p>
-                </div>
-            ) : filtered.length === 0 ? (
+            {filtered.length === 0 ? (
                 <p className="pack-msg">No dogs found.</p>
             ) : (
                 <div className="pack-grid">
@@ -124,8 +97,10 @@ const ThePack = () => {
                         <div key={dog.id} className="pack-card-link" onClick={() => setSelectedDog(dog)}>
                             <div className="pack-card">
                                 <div className="pack-card-img">
-                                    {dog.pinned === 1 && <div className="pack-card-pin">📌 Featured</div>}
-                                    {dog.sponsored === 1 || dog.sponsored === true ? null : (
+                                    {dog.pinned && <div className="pack-card-pin">Featured</div>}
+                                    {dog.adopted ? (
+                                        <div className="pack-card-banner pack-card-banner--adopted">🏡 Adopted</div>
+                                    ) : dog.sponsored ? null : (
                                         <div className="pack-card-banner">❤️ Needs a Sponsor</div>
                                     )}
                                     {dog.image ? (
@@ -139,7 +114,11 @@ const ThePack = () => {
                                 </div>
                                 <div className="pack-card-footer">
                                     <h3 className="pack-card-name">{dog.name}</h3>
-                                    {dog.sponsored === 1 || dog.sponsored === true ? (
+                                    {dog.adopted ? (
+                                        <span className="pack-sponsor-indicator pack-sponsor-indicator--adopted" aria-label={`${dog.name} has been adopted`}>
+                                            🏡 Adopted
+                                        </span>
+                                    ) : dog.sponsored ? (
                                         <span className="pack-sponsor-indicator" aria-label={`${dog.name} is sponsored`}>
                                             ✅ Sponsored
                                         </span>
@@ -185,7 +164,11 @@ const ThePack = () => {
                                     <span className="pack-modal-sub">We're working on {selectedDog.name}'s full story - check back soon!</span>
                                 </div>
                             )}
-                            {selectedDog.sponsored === 1 || selectedDog.sponsored === true ? (
+                            {selectedDog.adopted ? (
+                                <div className="pack-sponsor-indicator pack-sponsor-indicator--modal pack-sponsor-indicator--adopted">
+                                    🏡 {selectedDog.name} has found a home
+                                </div>
+                            ) : selectedDog.sponsored ? (
                                 <div className="pack-sponsor-indicator pack-sponsor-indicator--modal">
                                     ✅ {selectedDog.name} is already sponsored
                                 </div>
@@ -276,7 +259,7 @@ const ThePack = () => {
                                 <button className="pack-sponsor-btn" onClick={() => setSponsorDog(null)}>Close</button>
                             </div>
                         ) : (
-                            <form className="pack-sponsor-form" onSubmit={handleSponsorSubmit}>
+                            <form className="pack-sponsor-form" name="sponsor-interest" data-netlify="true" onSubmit={handleSponsorSubmit}>
                                 <div className="pack-sform-row">
                                     <div className="pack-sform-group">
                                         <label>Your Name *</label>

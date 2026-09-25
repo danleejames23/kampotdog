@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { apiUrl, getImageUrl } from '../../config/api';
+import { getImageUrl } from '../../config/api';
+import { dogs } from '../../data/siteData';
 import './ThePack.css';
 
 const DogDetail = () => {
     const { id } = useParams();
-    const [dog, setDog] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const dog = dogs.find((entry) => String(entry.id) === String(id));
 
-    useEffect(() => {
-        const fetchDog = async () => {
-            try {
-                const res = await fetch(apiUrl(`/dogs/${id}`));
-                if (!res.ok) throw new Error('Not found');
-                const data = await res.json();
-                setDog(data);
-            } catch (err) {
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDog();
-    }, [id]);
-
-    if (loading) return <div className="dog-detail-page sb-page"><p className="pack-msg">Loading...</p></div>;
-    if (error || !dog) return (
+    if (!dog) return (
         <div className="dog-detail-page sb-page">
             <p className="pack-msg">Dog not found.</p>
             <Link to="/the-pack" className="back-to-pack">← Back to The Pack</Link>

@@ -280,6 +280,16 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.2);
 }
 
+.pack-card-banner--adopted {
+    background: #008b8b;
+}
+
+.pack-sponsor-indicator--adopted {
+    color: #008b8b;
+    border-color: rgba(0, 139, 139, 0.35);
+    background: #e7f7f5;
+}
+
 /* ── Card Footer ──────────────────────────────── */
 .pack-card-footer {
     padding: 16px 18px 18px;

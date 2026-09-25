@@ -1,40 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
-import { apiUrl, getImageUrl } from '../../config/api';
+import { getImageUrl } from '../../config/api';
+import { blogs } from '../../data/siteData';
 import '../Pages/Pages.css';
 import './Blogs.css';
 import PawConfetti from '../Scrapbook/PawConfetti';
 
 const Blogs = () => {
-    const [blogs, setBlogs] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchBlogs = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch(apiUrl('/blogs'));
-            const data = await res.json();
-            if (!Array.isArray(data)) {
-                setBlogs([]);
-                return;
-            }
-
-            const featuredTitle = 'who is joe?';
-            const featured = data.filter((blog) => blog.title?.trim().toLowerCase() === featuredTitle);
-            const others = data.filter((blog) => blog.title?.trim().toLowerCase() !== featuredTitle);
-            setBlogs([...featured, ...others]);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchBlogs();
-    }, []);
-
     return (
         <div className="blogs-page sb-page">
             <PawConfetti />
@@ -48,9 +21,7 @@ const Blogs = () => {
 
             <section className="blogs-grid-wrap">
                 <div className="blogs-grid">
-                {loading ? (
-                    <p className="blogs-msg">Loading...</p>
-                ) : blogs.length === 0 ? (
+                {blogs.length === 0 ? (
                     <p className="blogs-msg">No posts yet.</p>
                 ) : (
                     blogs.map((blog) => (

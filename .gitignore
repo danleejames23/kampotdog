@@ -9,6 +9,7 @@ coverage/
 # Production builds
 build/
 dist/
+Render-ready/
 
 # Environment variables
 .env

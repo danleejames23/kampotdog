@@ -28,7 +28,7 @@ const Footer = (props) => {
             <Link to="/donations">Donations</Link>
             <Link to="/vet-debt">Vet Debt</Link>
             <Link to="/contact">Contact</Link>
-            <a href="mailto:kashifkzmi5@gmail.com">Email Us</a>
+            <a href="mailto:kampotdogsanctuary@gmail.com">Email Us</a>
           </div>
 
           <div className="footer-desktop-connect">
@@ -36,7 +36,7 @@ const Footer = (props) => {
             <div className="footer-contact-icons">
               <a
                 className="footer-contact-icon"
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/kampotdogsanctuary"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -45,21 +45,14 @@ const Footer = (props) => {
               </a>
               <a
                 className="footer-contact-icon"
-                href="mailto:kashifkzmi5@gmail.com"
+                href="mailto:kampotdogsanctuary@gmail.com"
                 aria-label="Email"
               >
                 <i className="fa fa-envelope"></i>
               </a>
               <a
                 className="footer-contact-icon"
-                href="tel:+923019583959"
-                aria-label="Phone"
-              >
-                <i className="fa fa-phone"></i>
-              </a>
-              <a
-                className="footer-contact-icon"
-                href="https://www.instagram.com/kaxhie_x/"
+                href="https://www.instagram.com/kampotdogsanctuary/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -84,7 +77,7 @@ const Footer = (props) => {
           <div className="footer-contact-icons">
             <a
               className="footer-contact-icon"
-              href="https://www.facebook.com/"
+              href="https://www.facebook.com/kampotdogsanctuary"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -93,21 +86,14 @@ const Footer = (props) => {
             </a>
             <a
               className="footer-contact-icon"
-              href="mailto:kashifkzmi5@gmail.com"
+              href="mailto:kampotdogsanctuary@gmail.com"
               aria-label="Email"
             >
               <i className="fa fa-envelope"></i>
             </a>
             <a
               className="footer-contact-icon"
-              href="tel:+923019583959"
-              aria-label="Phone"
-            >
-              <i className="fa fa-phone"></i>
-            </a>
-            <a
-              className="footer-contact-icon"
-              href="https://www.instagram.com/kaxhie_x/"
+              href="https://www.instagram.com/kampotdogsanctuary/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

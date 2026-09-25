@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { apiUrl } from '../../config/api';
+import { videos } from '../../data/siteData';
 import './YouTubeSection.css';
 
 const YT_CHANNEL_URL = 'https://www.youtube.com/@kampotdogsanctuary';
@@ -27,40 +27,11 @@ const VideoCard = ({ v, onClick }) => (
 );
 
 const YouTubeSection = () => {
-    const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [activeVideo, setActiveVideo] = useState(null);
     const tickerRef = useRef(null);
     const animRef = useRef(null);
     const posRef = useRef(0);
     const pausedRef = useRef(false);
-
-    useEffect(() => {
-        const fetchVideos = async () => {
-            try {
-                const loadVideos = async (endpoint) => {
-                    const res = await fetch(apiUrl(endpoint));
-                    if (!res.ok) return [];
-                    const data = await res.json();
-                    return Array.isArray(data) ? data : [];
-                };
-
-                const savedVideos = await loadVideos('/videos');
-                if (savedVideos.length > 0) {
-                    setVideos(savedVideos);
-                    return;
-                }
-
-                const channelVideos = await loadVideos('/videos/channel');
-                setVideos(channelVideos);
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchVideos();
-    }, []);
 
     useEffect(() => {
         if (!videos.length) return;
@@ -79,7 +50,7 @@ const YouTubeSection = () => {
         };
         animRef.current = requestAnimationFrame(tick);
         return () => cancelAnimationFrame(animRef.current);
-    }, [videos]);
+    }, []);
 
     return (
         <div className="yt-section">
@@ -101,9 +72,7 @@ const YouTubeSection = () => {
                 </a>
             </div>
 
-            {loading ? (
-                <div className="yt-loading">Loading videos...</div>
-            ) : videos.length === 0 ? (
+            {videos.length === 0 ? (
                 <p className="yt-empty">No videos found.</p>
             ) : (
                 <div
@@ -129,6 +98,7 @@ const YouTubeSection = () => {
                                 title={activeVideo.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
+                                referrerPolicy="strict-origin-when-cross-origin"
                             ></iframe>
                         </div>
                         <p className="yt-modal-title">{activeVideo.title}</p>

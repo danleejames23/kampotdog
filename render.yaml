@@ -1,18 +1,10 @@
 services:
   - type: web
-    name: kds-website
-    env: node
-    rootDir: server
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: PORT
-        value: 10000
-      - key: NODE_VERSION
-        value: 20
-      - key: JWT_SECRET
-        generateValue: true
-      - key: CORS_ORIGIN
-        value: "*"
-      - key: PG_SSL
-        value: "false"
+    name: kampot-dog-sanctuary
+    runtime: static
+    buildCommand: cd Client && npm ci && npm run build
+    staticPublishPath: Client/build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

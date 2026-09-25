@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import HomeDarkCardLeftPic from "./images/leftd1.png";
 import HomeDarkCardRightPic from "./images/rightd2.png";
-import { apiUrl } from '../../config/api';
+import { counters } from '../../data/siteData';
 
 const CardBelowHome = () => {
-    const [counters, setCounters] = useState([]);
-
-    useEffect(() => {
-        const fetchCounters = async () => {
-            try {
-                const res = await fetch(apiUrl(`/counters?ts=${Date.now()}`), {
-                    cache: 'no-store',
-                });
-                const data = await res.json();
-                setCounters(Array.isArray(data) ? data : []);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        fetchCounters();
-    }, []);
-
     return (
         <div className="counter-banner">
             <div className="counter-dog counter-dog-left">

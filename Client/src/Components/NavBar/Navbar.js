@@ -1,39 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "./images/logo.png";
 
 const Navbar = (props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  useEffect(() => {
+    closeMobileMenu();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const closeOnEscape = (event) => event.key === 'Escape' && closeMobileMenu();
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [mobileMenuOpen]);
+
+  const links = [
+    ['/', 'Home'], ['/vet-debt', 'Vet Debt'], ['/donations', 'Donations'],
+    ['/adopt-sponsor', 'Adopt / Sponsor'], ['/the-pack', 'The Pack'],
+    ['/blogs', 'Stories'], ['/contact', 'Contact'],
+  ];
+
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container" aria-label="Main navigation">
       <div className="navbar-left">
         <Link className="logo-container" to="/">
-          <img className="navbar-logo" src={logo} alt="KDS Logo" />
+          <img className="navbar-logo" src={logo} alt="" />
         </Link>
       </div>
       <div className="navbar-center">
         <ul className="navbar-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/vet-debt">Vet Debt</Link></li>
-          <li><Link to="/donations">Donations</Link></li>
-          <li><Link to="/adopt-sponsor">Adopt/Sponsor</Link></li>
-          <li><Link to="/the-pack">The Pack</Link></li>
-          <li><Link to="/blogs">Information / Blogs</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          {links.map(([to, label]) => (
+            <li key={to}><NavLink to={to} end={to === '/'}>{label}</NavLink></li>
+          ))}
         </ul>
       </div>
       <div className="navbar-right">
-        <a href="/donations#payment-methods">
-          <button className="Navbar-button">Donate</button>
-        </a>
+        <Link className="Navbar-button" to="/donations#payment-methods">Donate</Link>
         <button
           type="button"
           className="navbar-mobile-toggle"
-          aria-label="Toggle menu"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
           onClick={() => setMobileMenuOpen((prev) => !prev)}
         >
           <span></span>
@@ -42,18 +55,15 @@ const Navbar = (props) => {
         </button>
       </div>
 
-      <div className={`navbar-mobile-menu ${mobileMenuOpen ? "navbar-mobile-menu-open" : ""}`}>
+      {mobileMenuOpen && <button className="navbar-mobile-backdrop" aria-label="Close menu" onClick={closeMobileMenu} />}
+      <div id="mobile-menu" className={`navbar-mobile-menu ${mobileMenuOpen ? "navbar-mobile-menu-open" : ""}`}>
         <ul>
-          <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
-          <li><Link to="/vet-debt" onClick={closeMobileMenu}>Vet Debt</Link></li>
-          <li><Link to="/donations" onClick={closeMobileMenu}>Donations</Link></li>
-          <li><Link to="/adopt-sponsor" onClick={closeMobileMenu}>Adopt/Sponsor</Link></li>
-          <li><Link to="/the-pack" onClick={closeMobileMenu}>The Pack</Link></li>
-          <li><Link to="/blogs" onClick={closeMobileMenu}>Information / Blogs</Link></li>
-          <li><Link to="/contact" onClick={closeMobileMenu}>Contact</Link></li>
+          {links.map(([to, label]) => (
+            <li key={to}><NavLink to={to} end={to === '/'} onClick={closeMobileMenu}>{label}</NavLink></li>
+          ))}
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

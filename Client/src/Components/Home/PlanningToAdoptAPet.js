@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Card from "./Card";
-import { apiUrl } from '../../config/api';
+import { counters } from '../../data/siteData';
 import s1Image from './images/s1.jpg';
 import s2Image from './images/s2.jpg';
 import s3Image from './images/s3.jpg';
@@ -27,29 +27,7 @@ const staticCards = [
 
 const PlanningToAdoptAPet = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [dogsOnSiteValue, setDogsOnSiteValue] = useState('72');
-
-  useEffect(() => {
-    const fetchCounters = async () => {
-      try {
-        const res = await fetch(apiUrl(`/counters?ts=${Date.now()}`), {
-          cache: 'no-store',
-        });
-        const data = await res.json();
-        const dogsOnSiteCounter = Array.isArray(data)
-          ? data.find((counter) => counter.key === 'dogs_on_site')
-          : null;
-
-        if (dogsOnSiteCounter?.value) {
-          setDogsOnSiteValue(dogsOnSiteCounter.value);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchCounters();
-  }, []);
+  const dogsOnSiteValue = counters.find((counter) => counter.key === 'dogs_on_site')?.value || '85';
 
   const cards = staticCards.map((card) => (
     card.id === 'dogs-on-site'

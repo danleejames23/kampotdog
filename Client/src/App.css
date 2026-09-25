@@ -44,6 +44,10 @@ body {
     justify-content: center;
 }
 
+.navbar-brand-name {
+    display: none;
+}
+
 .logo-container>p,
 .brand-mark {
     font-family: 'Baloo 2', sans-serif;

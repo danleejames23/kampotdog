@@ -4,7 +4,6 @@ import Navbar from "./Components/NavBar/Navbar";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
 import Contact from "./Components/Contact/Contact";
-import AdminLogin from "./Components/AdminPanel/AdminLogin";
 import Blogs from "./Components/Blogs/Blogs";
 import BlogArticle from "./Components/Blogs/BlogArticle";
 import ThePack from "./Components/ThePack/ThePack";
@@ -191,10 +190,6 @@ const App = () => {
               <BlogArticle />
             </Layout>
           } 
-        />
-        <Route 
-          path="/admin" 
-          element={<AdminLogin />} 
         />
       </Routes>
     </Router>

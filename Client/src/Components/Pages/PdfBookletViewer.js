@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { apiUrl } from '../../config/api';
 
 const TOTAL_PAGES = 18;
 
 const PdfBookletViewer = ({ title, subtitle }) => {
     const [page, setPage] = useState(1);
 
-    const imageUrl = useMemo(() => apiUrl(`/booklet/p${page}.png`), [page]);
+    const imageUrl = useMemo(() => `/booklet/p${page}.png`, [page]);
 
     const goPrev = () => setPage((currentPage) => Math.max(1, currentPage - 1));
     const goNext = () => setPage((currentPage) => Math.min(TOTAL_PAGES, currentPage + 1));

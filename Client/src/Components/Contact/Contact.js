@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import contactDog from "../Home/images/kdopuitside.jpg";
-import { apiUrl } from '../../config/api';
+import { submitNetlifyForm } from '../../utils/netlifyForms';
 import './Contact.css';
 
 const IconEmail = () => (
@@ -42,17 +42,9 @@ const Contact = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch(apiUrl('/contact/save'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setStatus('error');
-      }
+      await submitNetlifyForm('contact', form);
+      setStatus('success');
+      setForm({ name: '', email: '', subject: '', message: '' });
     } catch {
       setStatus('error');
     } finally {
@@ -63,7 +55,7 @@ const Contact = () => {
   const marqueeItems = [
     '🐾 woof woof',
     '✨ come say hi',
-    '🐶 70+ dogs await',
+    '🐶 85 dogs await',
     '💌 we reply fast',
     '🏝 kampot, cambodia',
     '❤️ tail wags guaranteed',
@@ -115,7 +107,7 @@ const Contact = () => {
       <section className="contact-stats">
         <div className="stat-chip stat-chip--teal">
           <span className="stat-emoji">🐶</span>
-          <span className="stat-text"><strong>70+</strong> rescued dogs</span>
+          <span className="stat-text"><strong>100+</strong> rescued dogs</span>
         </div>
         <div className="stat-chip stat-chip--orange">
           <span className="stat-emoji">💌</span>
@@ -196,7 +188,7 @@ const Contact = () => {
               <button className="contact-submit-btn" onClick={() => setStatus('')}>Send Another</button>
             </div>
           ) : (
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <form className="contact-form" name="contact" data-netlify="true" onSubmit={handleSubmit}>
               <div className="contact-form-row">
                 <div className="contact-form-group">
                   <label>👋 Your Name</label>
@@ -232,7 +224,7 @@ const Contact = () => {
             <div className="contact-map-frame">
               <iframe
                 title="KDS Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3921.394220756344!2d104.1661834!3d10.626451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31083643dab95a07%3A0xdfca78888b816b71!2sHigh%20Tide%20Kampot!5e0!3m2!1sen!2skh!4v1777686646960!5m2!1sen!2skh"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=104.157%2C10.618%2C104.176%2C10.635&layer=mapnik&marker=10.626451%2C104.1661834"
                 width="100%" height="100%"
                 style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               />

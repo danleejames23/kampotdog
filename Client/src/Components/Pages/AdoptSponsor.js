@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Pages.css';
 import PageImageTicker from './PageImageTicker';
-import { apiUrl } from '../../config/api';
+import { submitNetlifyForm } from '../../utils/netlifyForms';
 import PdfBookletViewer from './PdfBookletViewer';
 import VisitorVideos from '../Home/VisitorVideos';
 import PawConfetti from '../Scrapbook/PawConfetti';
@@ -31,17 +31,9 @@ const AdoptSponsor = () => {
         e.preventDefault();
         setSubmitting(true);
         try {
-            const res = await fetch(apiUrl('/returns/save'), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(returnForm),
-            });
-            if (res.ok) {
-                setReturnStatus('success');
-                setReturnForm({ dogName: '', adopterName: '', email: '', phone: '', reason: '', additionalInfo: '' });
-            } else {
-                setReturnStatus('error');
-            }
+            await submitNetlifyForm('dog-return', returnForm);
+            setReturnStatus('success');
+            setReturnForm({ dogName: '', adopterName: '', email: '', phone: '', reason: '', additionalInfo: '' });
         } catch {
             setReturnStatus('error');
         } finally {
@@ -204,7 +196,7 @@ const AdoptSponsor = () => {
                                 <button className="as-return-btn" onClick={() => setShowReturnModal(false)}>Close</button>
                             </div>
                         ) : (
-                            <form className="as-return-form" onSubmit={handleReturnSubmit}>
+                            <form className="as-return-form" name="dog-return" data-netlify="true" onSubmit={handleReturnSubmit}>
                                 <div className="as-form-row">
                                     <div className="as-form-group">
                                         <label>Dog's Name *</label>

@@ -1,45 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { format } from 'date-fns';
 import { Link, useParams } from 'react-router-dom';
-import { apiUrl, getImageUrl } from '../../config/api';
+import { getImageUrl } from '../../config/api';
+import { blogs } from '../../data/siteData';
 import './Blogs.css';
 
 const BlogArticle = () => {
     const { id } = useParams();
-    const [blog, setBlog] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-
-    useEffect(() => {
-        const fetchBlog = async () => {
-            setLoading(true);
-            setError('');
-            try {
-                const res = await fetch(apiUrl(`/blogs/${id}`));
-                if (!res.ok) {
-                    throw new Error('Blog not found');
-                }
-                const data = await res.json();
-                setBlog(data);
-            } catch (err) {
-                setError('Blog not found.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchBlog();
-    }, [id]);
+    const blog = blogs.find((entry) => String(entry.id) === String(id));
 
     return (
         <div className="blog-article-page sb-page">
             <div className="blog-article-shell">
-                {loading ? (
-                    <p className="blog-article-msg">Loading article...</p>
-                ) : error || !blog ? (
+                {!blog ? (
                     <div className="blog-article-content">
                         <Link to="/blogs" className="blog-article-back">← Back to Blogs</Link>
-                        <p className="blog-article-msg">{error || 'Blog not found.'}</p>
+                        <p className="blog-article-msg">Blog not found.</p>
                     </div>
                 ) : (
                     <div className="blog-article-content">

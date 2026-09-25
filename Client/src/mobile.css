@@ -416,6 +416,8 @@ img, video, iframe {
         width: 100% !important;
         max-width: 100% !important;
         overflow: hidden !important;
+        touch-action: pan-y;
+        overscroll-behavior-x: contain;
         padding: 0 !important;
         margin: 0 auto !important;
     }

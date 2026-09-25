@@ -828,9 +828,14 @@
 
 @media (max-width: 380px) {
     .pack-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-    .pack-card-img { height: 240px; }
+    .pack-card-img { height: 150px; }
+    .pack-card-footer { padding: 9px 8px 10px; }
+    .pack-card-name { font-size: 0.9rem; }
 }
 
 /* ══════════════════════════════════════════════

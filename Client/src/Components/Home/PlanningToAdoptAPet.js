@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Card from "./Card";
 import { counters } from '../../data/siteData';
 import s1Image from './images/s1.jpg';
@@ -27,6 +27,7 @@ const staticCards = [
 
 const PlanningToAdoptAPet = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef(null);
   const dogsOnSiteValue = counters.find((counter) => counter.key === 'dogs_on_site')?.value || '85';
 
   const cards = staticCards.map((card) => (
@@ -35,10 +36,32 @@ const PlanningToAdoptAPet = () => {
       : card
   ));
 
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const distance = touchEndX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(distance) < 40) return;
+    setCurrentIndex((index) => (
+      distance < 0
+        ? Math.min(index + 1, cards.length - 1)
+        : Math.max(index - 1, 0)
+    ));
+  };
+
   return (
     <div className='planning-container'>
         <div className='boxes-carousel'>
-          <div className='boxes-viewport'>
+          <div
+            className='boxes-viewport'
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            aria-label="Swipe to browse support cards"
+          >
             <div
               className='boxes-container'
               style={{ '--cards-offset': `${currentIndex * 100}%` }}
